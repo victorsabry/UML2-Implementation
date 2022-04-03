@@ -27,8 +27,8 @@ namespace Pizza_project_2
 
                 const string OptionPrintMenu = "1";
                 const string OptionCreatePizza = "2";
-                const string Option = "3";
-                const string Option2 = "4";
+                const string OptionDeletePizza = "3";
+                const string OptionSearchPizza = "4";
 
                 if (choice == OptionPrintMenu)
                 {
@@ -46,8 +46,17 @@ namespace Pizza_project_2
                     {
                         Console.Write("Enter number for new pizza: ");
                         string pizzaNumberStr = Console.ReadLine();
-                        if(int.TryParse(pizzaNumberStr, out pizzaNumber))                        
-                            break;                                           
+                        if(int.TryParse(pizzaNumberStr, out pizzaNumber))
+                        {
+                            var existingPizza = _menu.SearchItem(pizzaNumber);
+                            bool numberIsFree = existingPizza == null;
+                            if (numberIsFree)
+                            {
+                                break;
+                            }
+
+                            Console.WriteLine($"Pizza number {pizzaNumber} already exists");
+                        }
                     }
 
                     Console.Write("Enter name for new pizza: ");
@@ -67,6 +76,16 @@ namespace Pizza_project_2
                     Console.WriteLine("New pizza created");
                     Console.WriteLine();
                     continue; 
+                }
+
+                if(choice == OptionDeletePizza)
+                {
+
+                }
+
+                if (choice == OptionSearchPizza)
+                {
+
                 }
             }
         }
