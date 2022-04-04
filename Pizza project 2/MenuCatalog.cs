@@ -11,10 +11,12 @@ namespace Pizza_project_2
         public void Print()
         {
             Console.WriteLine("MENU");
+            Console.WriteLine("-----------------------------");
             foreach(var menuItem in _menuItems)
             {
                 Console.WriteLine($"    {menuItem.Number}. {menuItem.Name} {menuItem.Price} kr");
             }
+            Console.WriteLine("-----------------------------");
         }
 
         public void CreateItem(int number, string name, decimal price)
@@ -47,17 +49,29 @@ namespace Pizza_project_2
             return null;
         }
 
-        public void Read()
+        public void Delete(int number)
         {
+            int index = (-1);
 
+            foreach (var menuItem in _menuItems)
+            {
+                if (number == menuItem.Number)
+                {
+                   index = _menuItems.IndexOf(menuItem);    
+                }
+            }
+
+            if (index > (-1))
+            {
+                _menuItems.RemoveAt(index);
+            }
+            
         }
+
         public void Update()
         {
 
         }
-        public void Delete()
-        {
-
-        }
+        
     }
 }

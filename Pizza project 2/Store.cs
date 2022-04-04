@@ -17,18 +17,22 @@ namespace Pizza_project_2
             bool running = true;
             while (running)
             {
-                Console.WriteLine("1: Print Menu");
-                Console.WriteLine("2: Create Pizza");
-                Console.WriteLine("3: Delete Pizza");
-                Console.WriteLine("4: Search Pizza");
-                Console.WriteLine();
-                Console.Write("Choose an option: ");
-                string choice = Console.ReadLine();
-
                 const string OptionPrintMenu = "1";
                 const string OptionCreatePizza = "2";
                 const string OptionDeletePizza = "3";
                 const string OptionSearchPizza = "4";
+                const string OptionUpdatePizza = "5";
+
+                Console.WriteLine($"{OptionPrintMenu}: Print Menu");
+                Console.WriteLine($"{OptionCreatePizza}: Create Pizza");
+                Console.WriteLine($"{OptionDeletePizza}: Delete Pizza");
+                Console.WriteLine($"{OptionSearchPizza}: Search Pizza");
+                Console.WriteLine($"{OptionUpdatePizza}: Update Pizza");
+                Console.WriteLine();
+                Console.Write("Choose an option: ");
+                string choice = Console.ReadLine();
+
+                
 
                 if (choice == OptionPrintMenu)
                 {
@@ -80,12 +84,85 @@ namespace Pizza_project_2
 
                 if(choice == OptionDeletePizza)
                 {
+                    Console.WriteLine();
+                    int pizzaNumberSelected;
+                    while (true)
+                    {
+                        Console.Write("Search for pizza for deletion: ");
+                        var pizzaSearched = Console.ReadLine();
 
+                        if (int.TryParse(pizzaSearched, out pizzaNumberSelected))
+                        {
+                            var existingPizza = _menu.SearchItem(pizzaNumberSelected);
+                            bool numberDoNotExist = existingPizza == null;
+                            if (numberDoNotExist)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine($"Pizza '{pizzaSearched}' does not exist");
+                                Console.WriteLine();
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine($"Deleting pizza: {existingPizza.Name} {existingPizza.Price} kr");
+                                _menu.Delete(pizzaNumberSelected);                                
+                                Console.WriteLine();
+
+                                break;
+                            }
+                        }                        
+                    }
                 }
 
                 if (choice == OptionSearchPizza)
                 {
+                    Console.WriteLine();
+                    int pizzaNumberSearched;
+                    while(true)
+                    {
+                        Console.Write("Search for pizza: ");
+                        var pizzaSearched = Console.ReadLine();
 
+                        if (int.TryParse(pizzaSearched, out pizzaNumberSearched))
+                        {
+                            var existingPizza = _menu.SearchItem(pizzaNumberSearched);
+                            bool numberDoNotExist = existingPizza == null;
+                            if (numberDoNotExist)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine($"Pizza '{pizzaSearched}' does not exist");
+                                Console.WriteLine();
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine($"Pizza found: {existingPizza.Name} {existingPizza.Price} kr");
+                                Console.WriteLine();
+
+                                break;
+                            }                                
+                        }
+                        else
+                        {
+                            var existingPizza = _menu.SearchItem(pizzaSearched);
+                            bool pizzaNameNotFound = existingPizza == null;
+
+                            if (pizzaNameNotFound)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine($"Pizza '{pizzaSearched}' does not exist");
+                                Console.WriteLine();
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine($"Pizza found: {existingPizza.Name} {existingPizza.Price} kr");
+                                Console.WriteLine();
+
+                                break;
+                            }                           
+                        }
+                    }                    
                 }
             }
         }
