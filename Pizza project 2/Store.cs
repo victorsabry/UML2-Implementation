@@ -10,7 +10,7 @@ namespace Pizza_project_2
 
         private void CreateMenuItems()
         {
-            _menu.CreateItem(1, "Mozzarella", 49);
+            _menu.CreateItem(1, "Chicken kebab", 63);
             _menu.CreateItem(2, "Hawaii", 57);
             _menu.CreateItem(3, "Pepperoni feast", 75);
         }
