@@ -7,15 +7,22 @@ namespace Pizza_project_2
     class MenuCatalog
     {
         private List<MenuItem> _menuItems = new List<MenuItem>();
-
+        
         public void Print()
         {
             Console.WriteLine("MENU");
             Console.WriteLine("-----------------------------");
-            foreach(var menuItem in _menuItems)
+            if(_menuItems.Count != 0)
             {
-                Console.WriteLine($"    {menuItem.Number}. {menuItem.Name} {menuItem.Price} kr");
+                foreach (var menuItem in _menuItems)
+                {
+                    Console.WriteLine($"    {menuItem.Number}. {menuItem.Name} {menuItem.Price} kr");
+                }
             }
+            else
+            {
+                Console.WriteLine("No pizzas found");
+            }            
             Console.WriteLine("-----------------------------");
         }
 
@@ -51,27 +58,47 @@ namespace Pizza_project_2
 
         public void Delete(int number)
         {
-            int index = (-1);
+            int index = GetIndex(number);            
+            if (index > -1)
+            {
+                _menuItems.RemoveAt(index);
+            }          
+        }
 
+        public int GetIndex(int number)
+        {
+            int index = -1;
             foreach (var menuItem in _menuItems)
             {
                 if (number == menuItem.Number)
                 {
-                   index = _menuItems.IndexOf(menuItem);    
+                    index = _menuItems.IndexOf(menuItem);
                 }
             }
-
-            if (index > (-1))
-            {
-                _menuItems.RemoveAt(index);
-            }
-            
+            return index;
         }
 
-        public void Update()
+        public void UpdatePizzaNumber(int number, int newNumber)
         {
-
+            int index = GetIndex(number);
+            _menuItems[index].Number = newNumber;
         }
-        
+
+        public void UpdatePizzaName(int number, string newName)
+        {
+            int index = GetIndex(number);
+            _menuItems[index].Name = newName;
+        }
+
+        public void UpdatePizzaPrice(int number, decimal newPrice)
+        {
+            int index = GetIndex(number);
+            _menuItems[index].Price = newPrice;
+        }
+
+        public bool IsListEmpty()
+        {
+            return _menuItems.Count == 0;
+        }        
     }
 }

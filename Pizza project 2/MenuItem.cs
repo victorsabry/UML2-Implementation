@@ -15,6 +15,6 @@ namespace Pizza_project_2
             Name = name;
             Number = number;
             Price = price;
-        }
+        }       
     }
 }
